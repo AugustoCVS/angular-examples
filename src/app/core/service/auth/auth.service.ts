@@ -13,12 +13,12 @@ export class AuthService {
   constructor(private httpClient: HttpClient) {
   }
 
-  register({ name, email, password, confirmPassword }: IRegisterRequest) {
-    return this.httpClient.post(`${this.ApiUrl}/register`, {
+  register({ name, email, password, confirm_password }: IRegisterRequest) {
+    return this.httpClient.post(`${this.ApiUrl}/users/register`, {
       name,
       email,
       password,
-      confirmPassword
+      confirm_password
     })
   }
 }
