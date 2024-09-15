@@ -12,5 +12,9 @@ export interface ILoginRequest {
 
 export interface ILoginResponse {
   token: string;
-  refreshToken: string;
+  refreshToken: {
+    id: string;
+    userId: string;
+    expiresIn: number;
+  }
 }
