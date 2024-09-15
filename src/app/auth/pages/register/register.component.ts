@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AuthService } from '../../../core/service/auth/auth.service';
 import { CommonModule } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
+import { NavigateUtils } from '../../../utils/navigate.utils';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +20,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private navigate: NavigateUtils,
   ) { }
 
   passwordMatchValidator(formGroup: FormGroup) {
@@ -44,16 +46,21 @@ export class RegisterComponent implements OnInit {
         .subscribe({
           next: () => {
             this.loading.next(false)
+            this.navigate.handleNavigate({ screen: '' });
           },
           error: () => {
             this.errorMessage = 'Registration failed. Please try again.';
             this.loading.next(false)
-          }
+          },
         });
       return;
     }
 
     return this.form.markAllAsTouched()
+  }
+
+  handleNavigateLogin() {
+    this.navigate.handleNavigate({ screen: '' });
   }
 
   ngOnInit(): void {

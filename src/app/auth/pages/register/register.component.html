@@ -52,6 +52,10 @@
       <button type="submit" [disabled]="isLoading$">
         Submit
       </button>
+
+      <div class="formFooter">
+        <p>Already have an account? <span (click)="handleNavigateLogin()">Login</span></p>
+      </div>
     </form>
   </main>
 </div>

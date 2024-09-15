@@ -67,3 +67,14 @@ button[type="submit"] {
 button[type="submit"]:hover {
   background-color: #0056b3;
 }
+
+.formFooter {
+  display: flex;
+  text-align: center;
+  margin-top: 10px;
+
+  span {
+    color: #007bff;
+    cursor: pointer;
+  }
+}
