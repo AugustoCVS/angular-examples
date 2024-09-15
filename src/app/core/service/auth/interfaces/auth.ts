@@ -4,3 +4,13 @@ export interface IRegisterRequest {
   password: string;
   confirm_password: string;
 }
+
+export interface ILoginRequest {
+  email: string;
+  password: string;
+}
+
+export interface ILoginResponse {
+  token: string;
+  refreshToken: string;
+}
