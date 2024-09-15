@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { AuthService } from '../../../core/service/auth/auth.service';
 import { NavigateUtils } from '../../../utils/navigate.utils';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { TokenUtils } from '../../utils/token.utils';
 
 @Component({
   selector: 'app-login',
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private navigate: NavigateUtils,
+    private token: TokenUtils,
   ) { }
 
   initializeForm() {
@@ -39,7 +41,10 @@ export class LoginComponent implements OnInit {
         .subscribe({
           next: (res) => {
             this.loading.next(false);
-            console.log(res);
+            this.token.handleSaveTokenOnStorage({
+              token: res.token,
+              refreshToken: res.refreshToken.id
+            });
           },
           error: () => {
             this.errorMessage = 'Login failed. Please try again.';
