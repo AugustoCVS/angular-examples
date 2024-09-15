@@ -1,0 +1,35 @@
+<div class="container">
+  <main class="form-signin">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <h1>Please Login</h1>
+
+      <div class="formWrapper">
+        <div class="formInput">
+          <label>Email address</label>
+          <input formControlName="email" type="email" class="form-control" placeholder="name@example.com" required>
+          <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+            <small *ngIf="form.get('email')?.errors?.['required']" class="errorMessage">Email is required</small>
+            <small *ngIf="form.get('email')?.errors?.['email']" class="errorMessage"> Email must be a valid email
+              address</small>
+          </div>
+        </div>
+
+        <div class="formInput">
+          <label>Password</label>
+          <input formControlName="password" type="password" class="form-control" placeholder="Password" required>
+          <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
+            <small *ngIf="form.get('password')?.errors?.['required']" class="errorMessage">Password is required</small>
+            <small *ngIf="form.get('password')?.errors?.['minlength']" class="errorMessage">Password must be at least 6
+              characters</small>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <div class="formFooter">
+      <p>Don`t have an account? <span (click)="handleNavigateRegister()">Register here</span></p>
+    </div>
+  </main>
+</div>

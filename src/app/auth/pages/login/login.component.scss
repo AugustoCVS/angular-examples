@@ -1,0 +1,80 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+main.form-signin {
+  width: 100%;
+  max-width: 380px;
+  padding: 15px;
+  margin: auto;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  text-align: center;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-signin input {
+  margin-bottom: 10px;
+  height: 45px;
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.form-signin label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #6c757d;
+}
+
+.formInput {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 14px;
+}
+
+button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.formFooter {
+  display: flex;
+  text-align: center;
+  margin-top: 10px;
+
+  span {
+    color: #007bff;
+    cursor: pointer;
+  }
+}
