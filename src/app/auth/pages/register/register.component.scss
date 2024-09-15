@@ -62,10 +62,18 @@ button[type="submit"] {
   border-radius: 5px;
   cursor: pointer;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 button[type="submit"]:hover {
   background-color: #0056b3;
+}
+
+button[type="submit"]:disabled {
+  background-color: #b3d7ff;
+  cursor: not-allowed;
 }
 
 .formFooter {

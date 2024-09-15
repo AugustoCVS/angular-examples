@@ -49,8 +49,9 @@
         </div>
       </div>
 
-      <button type="submit" [disabled]="isLoading$">
-        Submit
+      <button type="submit" [disabled]="(loading | async)">
+        <mat-spinner *ngIf="loading | async" color="accent" diameter="20"></mat-spinner>
+        <span *ngIf="!(loading | async)">register</span>
       </button>
 
       <div class="formFooter">

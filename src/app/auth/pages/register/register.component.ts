@@ -4,18 +4,18 @@ import { AuthService } from '../../../core/service/auth/auth.service';
 import { CommonModule } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
 import { NavigateUtils } from '../../../utils/navigate.utils';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, MatProgressSpinnerModule],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  isLoading$ = this.loading.asObservable();
   errorMessage: string = '';
 
   constructor(
