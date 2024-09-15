@@ -4,18 +4,18 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { BehaviorSubject } from 'rxjs';
 import { AuthService } from '../../../core/service/auth/auth.service';
 import { NavigateUtils } from '../../../utils/navigate.utils';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FormsModule],
+  imports: [ReactiveFormsModule, CommonModule, FormsModule, MatProgressSpinnerModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  isLoading$ = this.loading.asObservable();
   errorMessage: string = '';
 
 
@@ -37,8 +37,9 @@ export class LoginComponent implements OnInit {
       this.loading.next(true);
       this.authService.login(this.form.getRawValue())
         .subscribe({
-          next: () => {
+          next: (res) => {
             this.loading.next(false);
+            console.log(res);
           },
           error: () => {
             this.errorMessage = 'Login failed. Please try again.';
