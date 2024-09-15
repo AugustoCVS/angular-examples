@@ -1,0 +1,57 @@
+<div class="container">
+  <main class="form-signin">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <h1>Please register</h1>
+
+      <div class="formWrapper">
+        <div class="formInput">
+          <label>Name</label>
+          <input formControlName="name" class="form-control" placeholder="Name" required>
+          <div *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
+            <small *ngIf="form.get('name')?.errors?.['required']" class="errorMessage">Name is required</small>
+            <small *ngIf="form.get('name')?.errors?.['minlength']" class="errorMessage">Name must be at least 3
+              characters</small>
+          </div>
+        </div>
+
+        <div class="formInput">
+          <label>Email address</label>
+          <input formControlName="email" type="email" class="form-control" placeholder="name@example.com" required>
+          <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+            <small *ngIf="form.get('email')?.errors?.['required']" class="errorMessage">Email is required</small>
+            <small *ngIf="form.get('email')?.errors?.['email']" class="errorMessage"> Email must be a valid email
+              address</small>
+          </div>
+        </div>
+
+        <div class="formInput">
+          <label>Password</label>
+          <input formControlName="password" type="password" class="form-control" placeholder="Password" required>
+          <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
+            <small *ngIf="form.get('password')?.errors?.['required']" class="errorMessage">Password is required</small>
+            <small *ngIf="form.get('password')?.errors?.['minlength']" class="errorMessage">Password must be at least 6
+              characters</small>
+          </div>
+        </div>
+
+        <div class="formInput">
+          <label>Confirm Password</label>
+          <input formControlName="confirm_password" type="password" class="form-control" placeholder="Confirm Password"
+            required>
+          <div *ngIf="form.errors?.['passwordMismatch'] && form.get('confirm_password')?.touched">
+            <small>Passwords must match</small>
+          </div>
+          <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
+            <small *ngIf="form.get('password')?.errors?.['required']" class="errorMessage">Password is required</small>
+            <small *ngIf="form.get('password')?.errors?.['minlength']" class="errorMessage">Password must be at least 6
+              characters</small>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="isLoading$">
+        Submit
+      </button>
+    </form>
+  </main>
+</div>
