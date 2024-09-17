@@ -1,5 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { userActions } from "./user.actions";
+import { IUserResponse } from "../../core/service/user/interfaces/user";
 
 enum userStatus {
   loading = 'loading',
@@ -9,14 +10,15 @@ enum userStatus {
 }
 
 export interface userState {
-  name: string,
-  email: string,
+  user: IUserResponse,
   status: userStatus
 }
 
 const initialState: userState = {
-  name: '',
-  email: '',
+  user: {
+    name: '',
+    email: ''
+  },
   status: userStatus.pending
 }
 
@@ -31,8 +33,10 @@ export const userReducer = createReducer(
   on(userActions.loadUserInfoSuccess, (states, { user }) => {
     return {
       ...states,
-      name: user.name,
-      email: user.email,
+      user: {
+        name: user.name,
+        email: user.email,
+      },
       status: userStatus.success
     }
   }),
