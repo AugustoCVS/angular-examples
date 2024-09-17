@@ -24,8 +24,12 @@ export class TokenUtils {
   }
 
   handleDecodeToken() {
-    const token = localStorage.getItem('token') || '';
+    const token = localStorage.getItem('token');
 
-    return jwtDecode(token);
+    if (token) {
+      return jwtDecode(token);
+    }
+
+    return null;
   }
 }
