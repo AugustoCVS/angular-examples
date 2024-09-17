@@ -28,11 +28,11 @@ export const userReducer = createReducer(
       status: userStatus.loading
     }
   }),
-  on(userActions.loadUserInfoSuccess, (states, userInfoObj) => {
+  on(userActions.loadUserInfoSuccess, (states, { user }) => {
     return {
       ...states,
-      name: userInfoObj.user.name,
-      email: userInfoObj.user.email,
+      name: user.name,
+      email: user.email,
       status: userStatus.success
     }
   }),
