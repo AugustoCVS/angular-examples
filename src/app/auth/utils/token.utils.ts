@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -20,5 +21,11 @@ export class TokenUtils {
   handleRemoveTokenFromStorage() {
     localStorage.removeItem('token');
     localStorage.removeItem('refreshToken');
+  }
+
+  handleDecodeToken() {
+    const token = localStorage.getItem('token') || '';
+
+    return jwtDecode(token);
   }
 }
