@@ -7,6 +7,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { authInterceptor } from './core/service/interceptors/auth.interceptor';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
+import { getUserInfoEffect } from './store/user/user.effects';
+import { storeReducers } from './store/store.reducers';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,7 +16,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
     provideAnimationsAsync(),
-    provideStore(),
-    provideEffects()
-],
+    provideStore(storeReducers),
+    provideEffects({ getUserInfoEffect }),
+  ],
 };
