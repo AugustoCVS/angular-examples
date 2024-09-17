@@ -1,0 +1,9 @@
+<div>
+  <h1>
+    Home Page
+  </h1>
+  <p *ngIf="user$ | async as user">
+    {{ user.name }}
+    {{ user.email }}
+  </p>
+</div>
