@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit {
               token: res.token,
               refreshToken: res.refreshToken.id
             });
+            this.navigate.handleNavigate({ screen: 'home' });
           },
           error: () => {
             this.errorMessage = 'Login failed. Please try again.';
