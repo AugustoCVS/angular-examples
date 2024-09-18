@@ -3,19 +3,32 @@ import { RegisterComponent } from './auth/pages/register/register.component';
 import { LoginComponent } from './auth/pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AuthGuard } from './auth/services/auth-guard.service';
+import { WalletsComponent } from './pages/wallets/wallets.component';
+import { PublicGuard } from './auth/services/public-guard.service';
 
 export const routes: Routes = [
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
+    canActivate: [PublicGuard]
   },
   {
     path: '',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [PublicGuard]
   },
   {
     path: 'home',
     component: HomeComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'wallets',
+    component: WalletsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: '**',
+    redirectTo: 'home'
   }
 ];
