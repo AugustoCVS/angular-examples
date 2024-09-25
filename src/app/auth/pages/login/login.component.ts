@@ -1,43 +1,41 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { AuthService } from '../../../core/service/auth/auth.service';
 import { NavigateUtils } from '../../../utils/navigate.utils';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TokenUtils } from '../../utils/token.utils';
+import { ILoginRequest } from '../../../core/service/auth/interfaces/auth';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FormsModule, MatProgressSpinnerModule],
+  imports: [ReactiveFormsModule, CommonModule, MatProgressSpinnerModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent implements OnInit {
-  form: FormGroup = new FormGroup({});
-  loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  errorMessage: string = '';
+export class LoginComponent {
+  private formBuilderService: NonNullableFormBuilder = inject(NonNullableFormBuilder);
+  protected loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  protected errorMessage: string = '';
 
+  protected form = this.formBuilderService.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+  });
 
   constructor(
-    private formBuilder: FormBuilder,
     private authService: AuthService,
     private navigate: NavigateUtils,
     private token: TokenUtils,
   ) { }
 
-  initializeForm() {
-    this.form = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-    })
-  }
-
   submit() {
+    const formValues = this.form.value;
     if (this.form.valid) {
       this.loading.next(true);
-      this.authService.login(this.form.getRawValue())
+      this.authService.login(formValues as ILoginRequest)
         .subscribe({
           next: (res) => {
             this.loading.next(false);
@@ -45,6 +43,7 @@ export class LoginComponent implements OnInit {
               token: res.token,
               refreshToken: res.refreshToken.id
             });
+            this.form.reset();
             this.navigate.handleNavigate({ screen: 'home' });
           },
           error: () => {
@@ -52,18 +51,15 @@ export class LoginComponent implements OnInit {
             this.loading.next(false);
           }
         });
+
       return;
     }
 
-    return this.form.markAllAsTouched();
+    this.form.markAllAsTouched();
   }
 
   handleNavigateRegister() {
     this.navigate.handleNavigate({ screen: 'register' });
-  }
-
-  ngOnInit(): void {
-    this.initializeForm();
   }
 
 }

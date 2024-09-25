@@ -7,20 +7,16 @@
         <div class="formInput">
           <label>Email address</label>
           <input formControlName="email" type="email" class="form-control" placeholder="name@example.com" required>
-          <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
-            <small *ngIf="form.get('email')?.errors?.['required']" class="errorMessage">Email is required</small>
-            <small *ngIf="form.get('email')?.errors?.['email']" class="errorMessage"> Email must be a valid email
-              address</small>
+          <div *ngIf="form.controls.email.invalid && form.controls.email.touched">
+            <small *ngIf="form.controls.email.invalid" class="errorMessage">Invalid field</small>
           </div>
         </div>
 
         <div class="formInput">
           <label>Password</label>
           <input formControlName="password" type="password" class="form-control" placeholder="Password" required>
-          <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
-            <small *ngIf="form.get('password')?.errors?.['required']" class="errorMessage">Password is required</small>
-            <small *ngIf="form.get('password')?.errors?.['minlength']" class="errorMessage">Password must be at least 6
-              characters</small>
+          <div *ngIf="form.controls.password.invalid && form.controls.password.touched">
+            <small *ngIf="form.controls.password.invalid" class="errorMessage">Invalid field</small>
           </div>
         </div>
       </div>
