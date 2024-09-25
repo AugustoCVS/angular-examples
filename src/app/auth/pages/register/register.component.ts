@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/service/auth/auth.service';
 import { CommonModule } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
@@ -13,36 +13,27 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
-  form: FormGroup = new FormGroup({});
+export class RegisterComponent {
   loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   errorMessage: string = '';
 
   constructor(
-    private formBuilder: FormBuilder,
     private authService: AuthService,
     private navigate: NavigateUtils,
-  ) { }
-
-  passwordMatchValidator(formGroup: FormGroup) {
-    const password = formGroup.get('password')?.value;
-    const confirm_password = formGroup.get('confirm_password')?.value;
-    return password === confirm_password ? null : { passwordMismatch: true };
+  ) {
   }
 
-  initializeForm() {
-    this.form = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.minLength(3)]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirm_password: ['', Validators.required]
-    }, { validators: this.passwordMatchValidator });
-  }
+  form: FormGroup = new FormGroup({
+    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    confirm_password: new FormControl('', Validators.required)
+  });
 
   submit() {
     if (this.form.valid) {
       this.loading.next(true)
-      this.authService.register(this.form.getRawValue())
+      this.authService.register(this.form.value)
         .subscribe({
           next: () => {
             this.loading.next(false)
@@ -62,10 +53,4 @@ export class RegisterComponent implements OnInit {
   handleNavigateLogin() {
     this.navigate.handleNavigate({ screen: '' });
   }
-
-  ngOnInit(): void {
-    this.initializeForm();
-  }
-
-
 }
