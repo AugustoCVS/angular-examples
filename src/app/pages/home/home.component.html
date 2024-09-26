@@ -2,8 +2,9 @@
   <h1>
     Home Page
   </h1>
-  <p *ngIf="user$ | async as user">
-    {{ user.name }}
-    {{ user.email }}
-  </p>
+  <ng-container *ngIf="userInfo$ | async as userInfo">
+    <p>
+      {{ userInfo.name }} - {{ userInfo.email }}
+    </p>
+  </ng-container>
 </div>
