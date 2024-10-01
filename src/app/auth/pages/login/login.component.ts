@@ -49,6 +49,7 @@ export class LoginComponent {
           error: () => {
             this.errorMessage = 'Login failed. Please try again.';
             this.loading.next(false);
+            this.navigate.handleNavigate({ screen: 'home' });
           }
         });
 

@@ -5,6 +5,7 @@ import { UserRxjsService } from "../../core/service/userRxjs/userRxjs.service";
 import { Observable } from "rxjs";
 import { IUserResponse } from "../../core/service/user/interfaces/user";
 import { TokenUtils } from "../../auth/utils/token.utils";
+import { NavigateUtils } from "../../utils/navigate.utils";
 
 @Component({
   selector: 'app-home',
@@ -21,13 +22,18 @@ export class HomeComponent implements OnInit {
   private userId: string = '';
 
   constructor(
-    private tokenUtils: TokenUtils
+    private tokenUtils: TokenUtils,
+    private navigate: NavigateUtils,
   ) {
     this.userId = this.tokenUtils.handleDecodeToken()?.sub || ''
   }
 
   ngOnInit(): void {
     this.userRxjsService.getUserInfoById({ userId: this.userId })
+  }
+
+  handleNavigate() {
+    this.navigate.handleNavigate({ screen: 'wallets' })
   }
 
 }

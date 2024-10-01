@@ -20,12 +20,12 @@ export const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [AuthGuard]
+    canActivate: [PublicGuard]
   },
   {
     path: 'wallets',
     component: WalletsComponent,
-    canActivate: [AuthGuard]
+    canActivate: [PublicGuard]
   },
   {
     path: '**',

@@ -2,6 +2,9 @@
   <h1>
     Home Page
   </h1>
+  <button (click)="handleNavigate()">
+    navegar wallets
+  </button>
   <ng-container *ngIf="userInfo$ | async as userInfo">
     <p>
       {{ userInfo.name }} - {{ userInfo.email }}
