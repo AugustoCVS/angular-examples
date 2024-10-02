@@ -6,6 +6,12 @@
   Nosso signal computed: {{ computedExemplo() }}
 </p>
 
+<p>
+  Nosso signal as observable: {{ exemploCount$ | async }}
+</p>
+
+<app-onpush />
+
 <div>
   <button (click)="executar()">
     executar
