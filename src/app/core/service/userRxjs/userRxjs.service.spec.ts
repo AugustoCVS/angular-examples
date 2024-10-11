@@ -16,7 +16,8 @@ describe('UserRxjsService', () => {
       providers: [
         UserRxjsService,
         provideHttpClient(),
-        provideHttpClientTesting()]
+        provideHttpClientTesting()
+      ]
     });
     service = TestBed.inject(UserRxjsService);
     httpMock = TestBed.inject(HttpTestingController);
