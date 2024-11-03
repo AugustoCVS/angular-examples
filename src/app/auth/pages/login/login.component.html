@@ -21,9 +21,9 @@
         </div>
       </div>
 
-      <button type="submit" [disabled]="(loading | async)">
-        <mat-spinner *ngIf="loading | async" color="accent" diameter="20"></mat-spinner>
-        <span *ngIf="!(loading | async)">Login</span>
+      <button type="submit" [disabled]="(loading$ | async)">
+        <mat-spinner *ngIf="loading$ | async" color="accent" diameter="20"></mat-spinner>
+        <span *ngIf="!(loading$ | async)">Login</span>
       </button>
     </form>
 

@@ -17,8 +17,9 @@ import { ILoginRequest } from '../../../core/service/auth/interfaces/auth';
 })
 export class LoginComponent {
   private formBuilderService: NonNullableFormBuilder = inject(NonNullableFormBuilder);
-  protected loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   protected errorMessage: string = '';
+  protected loading$ = this.loading.asObservable();
 
   protected form = this.formBuilderService.group({
     email: ['', [Validators.required, Validators.email]],
@@ -48,8 +49,8 @@ export class LoginComponent {
           },
           error: () => {
             this.errorMessage = 'Login failed. Please try again.';
-            this.loading.next(false);
-            this.navigate.handleNavigate({ screen: 'home' });
+            // this.loading.next(false);
+            // this.navigate.handleNavigate({ screen: 'home' });
           }
         });
 
